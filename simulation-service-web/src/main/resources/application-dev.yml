@@ -1,0 +1,92 @@
+### 开发环境
+server:
+  port: 62
+spring:
+  application:
+    name: web
+  main:
+    allow-bean-definition-overriding: true  # 解决Bean重复定义问题
+  ## 数据库数据源配置
+  datasource:
+    master:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://127.0.0.1:3306/simulation?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8&useAffectedRows=true&useSSL=false
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
+    slave:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://127.0.0.1:3306/simulation?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8&useAffectedRows=true&useSSL=false
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: root
+    druid:
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: root
+        login-password: root1.
+        allow:
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 2000
+      filters: stat, wall
+      test-on-borrow: false
+      test-while-idle: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  ## redis配置
+  redis:
+    password:
+    sentinel:
+      master: mymaster
+      nodes: 10.0.117.216:26379
+    database: 1
+    timeout: 6000
+
+## Mybatis
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml  # 配置文件路径
+
+## Mybatis-plus
+mybatis-plus:
+  configuration:
+    # 数据库下划线自动转驼峰标示关闭
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mybatis/*/*.xml
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+## Pagehelper配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: false
+  params: count=countSql
+
+## Log
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: ./logger/simulation-service-web
+  level:
+    com.iqilu.*: debug
+
+# 消息开关
+message_on_off: false
+
+# 客户端用户地址 - 通过用户电话获取用户ID
+client_get_user_id_link: "https://app-auth.iqilu.com/service/member/byphone"
+# 客户端用户地址 - 根据ID获取用户信息
+client_get_user_info_link: "https://app-auth.iqilu.com/service/member/byids"
+# 客户端用户地址 - 消息推送到一县一端APP
+message_push: "https://app-auth.iqilu.com/service/message/add"

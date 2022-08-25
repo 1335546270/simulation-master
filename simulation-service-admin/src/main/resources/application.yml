@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: ${DEPLOY_ENV}
+
+## SQL日志打印开关
+logging:
+  level:
+    com:
+      iqilu:
+        dao: debug
+
+innerapp: caiji
+
+secret:
+  # url请求验签密钥
+  param_secret: cb5a5965ccb9412cae8717612d0e251b
+  # 本系统后台token验证密钥
+  admin_secret: cb5a5965ccb9412cae8717612d0e251b
+  # ResultEncryptVo返回值加密密钥
+  response_secret: 7e4836058201f7b89b40fbe650ade6a5
+  # 创奇后台派发-跳转验证密钥
+  jump_secret: 5b81fb8dbafcb9e04b35d13be3e93eaa
+  # 请求[附件上传]密钥
+  upload_secret: asdasd68967asd687atdda8768asduagds87asdt8
+  # 请求[用户系统]接口密钥
+  request_secret: 661ce2159a9b969d55358baf6b7fb73c

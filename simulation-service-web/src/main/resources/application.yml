@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: ${DEPLOY_ENV}
+
+## SQL日志打印开关
+logging:
+  level:
+    com:
+      iqilu:
+        dao: debug
+
+secret:
+  # url请求验签密钥
+  param_secret: cb5a5965ccb9412cae8717612d0e251b
+  # 客户端验证密钥
+  client_secret: 1f68ea4aeb687a6561707b6e3523c84e
+  # ResultEncryptVo返回值加密密钥
+  response_secret: 7e4836058201f7b89b40fbe650ade6a5
